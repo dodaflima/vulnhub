@@ -1,0 +1,13 @@
+---
+- hosts: all
+  vars:
+    - dest_dir: /opt
+    - home_path: /home/vagrant
+  become: yes
+  user: vagrant
+  tasks:
+    - include_vars: vars/juice_shop.yml
+    - include_vars: vars/node.yml
+
+    - include_tasks: tasks/node.yml
+    - include_tasks: tasks/juice_shop.yml
