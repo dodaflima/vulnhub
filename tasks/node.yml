@@ -1,0 +1,29 @@
+---
+- name: NodeJS | Download tar file
+  ansible.builtin.get_url:
+    url: "{{ node_download_url }}"
+    dest: "{{ home_path }}/{{ node_download_version }}.tar.xz"
+
+- name: NodeJS | Create dest folder
+  ansible.builtin.file:
+    path: "{{ node_dest_dir }}"
+    state: directory
+    mode: "0755"
+
+- name: NodeJS | Extract tar file
+  ansible.builtin.unarchive:
+    src: "{{ home_path }}/{{ node_download_version }}.tar.xz"
+    dest: "{{ node_dest_dir }}"
+    remote_src: yes
+
+- name: NodeJS | ln bin files
+  ansible.builtin.file:
+    src: "{{ node_dest_dir }}/{{ node_download_version }}/bin/node"
+    dest: "/usr/local/bin/node"
+    state: link
+
+- name: NodeJS | ln bin files
+  ansible.builtin.file:
+    src: "{{ node_dest_dir }}/{{ node_download_version }}/bin/npm"
+    dest: "/usr/local/bin/npm"
+    state: link

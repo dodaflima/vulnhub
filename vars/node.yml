@@ -1,0 +1,5 @@
+---
+node_dest_dir: "{{ dest_dir }}/node"
+node_version: v18.16.0
+node_download_version: "node-{{ node_version }}-linux-x64"
+node_download_url: "https://nodejs.org/dist/{{ node_version }}/{{ node_download_version }}.tar.xz"
